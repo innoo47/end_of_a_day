@@ -1,3 +1,4 @@
+import 'package:end_of_a_day/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -33,8 +34,26 @@ class MainCalendar extends StatelessWidget {
           headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleTextStyle: TextStyle(
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
               fontSize: 18,
+              fontFamily: 'MaruBuriRegular',
+            ),
+          ),
+          calendarStyle: CalendarStyle(
+            defaultTextStyle: const TextStyle(
+              fontFamily: 'MaruBuriRegular',
+            ),
+            weekendTextStyle: const TextStyle(
+              fontFamily: 'MaruBuriRegular',
+              color: Colors.red,
+            ),
+            selectedTextStyle: const TextStyle(
+              fontFamily: 'MaruBuriRegular',
+              color: Colors.white,
+            ),
+            outsideTextStyle: TextStyle(
+              fontFamily: 'MaruBuriRegular',
+              color: TEXT_FIELD_FILL_COLOR,
             ),
           ),
         ),

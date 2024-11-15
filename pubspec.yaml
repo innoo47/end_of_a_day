@@ -70,6 +70,24 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  fonts:
+    - family: MaruBuriBold
+      fonts:
+        - asset: assets/fonts/MaruBuri-Bold.ttf
+    - family: MaruBuriExtraLight
+      fonts:
+        - asset: assets/fonts/MaruBuri-ExtraLight.ttf
+    - family: MaruBuriLight
+      fonts:
+        - asset: assets/fonts/MaruBuri-Light.ttf
+    - family: MaruBuriRegular
+      fonts:
+        - asset: assets/fonts/MaruBuri-Regular.ttf
+    - family: MaruBuriSemiBold
+      fonts:
+        - asset: assets/fonts/MaruBuri-SemiBold.ttf
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

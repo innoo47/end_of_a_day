@@ -43,6 +43,10 @@ class MainCalendar extends StatelessWidget {
             defaultTextStyle: const TextStyle(
               fontFamily: 'MaruBuriRegular',
             ),
+            todayTextStyle: const TextStyle(
+              fontFamily: 'MaruBuriRegular',
+              color: Colors.white,
+            ),
             weekendTextStyle: const TextStyle(
               fontFamily: 'MaruBuriRegular',
               color: Colors.red,

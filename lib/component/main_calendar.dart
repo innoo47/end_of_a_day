@@ -1,5 +1,6 @@
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class MainCalendar extends StatelessWidget {
@@ -19,46 +20,72 @@ class MainCalendar extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: TableCalendar(
-          locale: "ko_kr",
-          onDaySelected: onDaySelected,
-          selectedDayPredicate: (date) =>
-              date.year == selectedDate.year &&
-              date.month == selectedDate.month &&
-              date.day == selectedDate.day,
-          focusedDay: DateTime.now(),
-          firstDay: DateTime(1800, 1, 1),
-          lastDay: DateTime(3000, 1, 1),
-          headerStyle: const HeaderStyle(
-            formatButtonVisible: false,
-            titleTextStyle: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-              fontFamily: 'MaruBuriRegular',
-            ),
+      child: TableCalendar(
+        locale: "ko_kr",
+        onDaySelected: onDaySelected,
+        selectedDayPredicate: (date) =>
+            date.year == selectedDate.year &&
+            date.month == selectedDate.month &&
+            date.day == selectedDate.day,
+        focusedDay: DateTime.now(),
+        firstDay: DateTime(1800, 1, 1),
+        lastDay: DateTime(3000, 1, 1),
+        rowHeight: 33.h,
+        daysOfWeekHeight: 16.h,
+        // 헤더 스타일
+        headerStyle: HeaderStyle(
+          formatButtonVisible: false,
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 13.sp,
+            fontFamily: 'MaruBuriSemiBold',
           ),
-          calendarStyle: CalendarStyle(
-            defaultTextStyle: const TextStyle(
-              fontFamily: 'MaruBuriRegular',
-            ),
-            todayTextStyle: const TextStyle(
-              fontFamily: 'MaruBuriRegular',
-              color: Colors.white,
-            ),
-            weekendTextStyle: const TextStyle(
-              fontFamily: 'MaruBuriRegular',
-              color: Colors.red,
-            ),
-            selectedTextStyle: const TextStyle(
-              fontFamily: 'MaruBuriRegular',
-              color: Colors.white,
-            ),
-            outsideTextStyle: TextStyle(
-              fontFamily: 'MaruBuriRegular',
-              color: TEXT_FIELD_FILL_COLOR,
-            ),
+        ),
+        // 요일 스타일
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekdayStyle: TextStyle(
+            fontFamily: 'MaruBuriSemiBold',
+            fontSize: 11.sp,
+          ),
+          weekendStyle: TextStyle(
+            fontFamily: 'MaruBuriSemiBold',
+            fontSize: 11.sp,
+            color: Colors.red,
+          ),
+        ),
+        // 달력 스타일
+        calendarStyle: CalendarStyle(
+          defaultTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+          ),
+          todayTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+            color: Colors.white,
+          ),
+          weekendTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+            color: Colors.red,
+          ),
+          selectedTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+            color: Colors.white,
+          ),
+          outsideTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+            color: TEXT_FIELD_FILL_COLOR,
+          ),
+          withinRangeTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
+          ),
+          rangeStartTextStyle: TextStyle(
+            fontFamily: 'MaruBuriRegular',
+            fontSize: 11.sp,
           ),
         ),
       ),

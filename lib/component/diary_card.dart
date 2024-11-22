@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DiaryCard extends StatelessWidget {
   const DiaryCard({super.key});
@@ -21,9 +22,9 @@ class DiaryCard extends StatelessWidget {
               child: AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
-                    '오늘 하루 이 시간은 당신의 것이다. 하루를 착한 행위로 장식하라. - 루즈벨트',
-                    textStyle: const TextStyle(
-                      fontSize: 13,
+                    '오늘 하루 이 시간은 당신의 것이다.\n하루를 착한 행위로 장식하라. - 루즈벨트',
+                    textStyle: TextStyle(
+                      fontSize: 11.sp,
                       fontFamily: 'MaruBuriSemiBold',
                     ),
                     speed: const Duration(milliseconds: 80),

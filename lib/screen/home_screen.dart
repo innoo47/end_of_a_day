@@ -3,6 +3,7 @@ import 'package:end_of_a_day/component/main_calendar.dart';
 import 'package:end_of_a_day/component/phrases.dart';
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,13 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           '하루의 끝',
           style: TextStyle(
-            fontSize: 26,
+            fontSize: 18.sp,
             fontFamily: 'MaruBuriBold',
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18),
             child: IconButton(
               onPressed: () => {},
               icon: const Icon(
@@ -45,33 +46,37 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
-              child: Text(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
+          child: Column(
+            children: [
+              /* 소개글 */
+              Text(
                 '하루를 마무리하며 간단한 일기를 작성해보세요.',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 11.sp,
                   fontWeight: FontWeight.w100,
                   fontFamily: 'MaruBuriLight',
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
-              child: MainCalendar(
+              SizedBox(
+                height: 10.h,
+              ),
+              /* 달력 */
+              MainCalendar(
                 selectedDate: selectedDate,
                 onDaySelected: onDaySelected,
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 28, vertical: 8),
-              child: DiaryCard(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
-              child: Container(
+              SizedBox(
+                height: 10.h,
+              ),
+              /* 글귀 카드 */
+              const DiaryCard(),
+              SizedBox(
+                height: 10.h,
+              ),
+              /* 일기 리스트 */
+              Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -84,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

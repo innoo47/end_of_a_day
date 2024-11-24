@@ -17,22 +17,25 @@ class DiaryCard extends StatelessWidget {
             ),
             alignment: Alignment.centerLeft,
             height: 60,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
-              child: AnimatedTextKit(
-                animatedTexts: [
-                  TypewriterAnimatedText(
-                    '오늘 하루 이 시간은 당신의 것이다.\n하루를 착한 행위로 장식하라. - 루즈벨트',
-                    textStyle: TextStyle(
-                      fontSize: 11.sp,
-                      fontFamily: 'MaruBuriSemiBold',
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      '오늘 하루 이 시간은 당신의 것이다.\n하루를 착한 행위로 장식하라. - 루즈벨트',
+                      textStyle: TextStyle(
+                        fontSize: 11.sp,
+                        fontFamily: 'MaruBuriSemiBold',
+                      ),
+                      speed: const Duration(milliseconds: 80),
                     ),
-                    speed: const Duration(milliseconds: 80),
-                  ),
-                ],
-                pause: const Duration(milliseconds: 1000),
-                isRepeatingAnimation: true,
-                repeatForever: true,
+                  ],
+                  pause: const Duration(milliseconds: 1000),
+                  isRepeatingAnimation: true,
+                  repeatForever: true,
+                ),
               ),
             ),
           ),

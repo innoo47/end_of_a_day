@@ -37,16 +37,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// MaterialApp(
-// debugShowCheckedModeBanner: false,
-// title: 'Flutter Demo',
-// themeMode: ThemeMode.light,
-// theme: ThemeData.light(
-// useMaterial3: true,
-// ),
-// darkTheme: ThemeData.dark(
-// useMaterial3: true,
-// ),
-// home: const HomeScreen(),
-// ),

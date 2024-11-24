@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../const/colors.dart';
-
 class Phrases extends StatelessWidget {
   final String title;
   final String writedDate;
@@ -12,16 +10,18 @@ class Phrases extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: DARK_GREY_COLOR),
-          bottom: BorderSide(color: DARK_GREY_COLOR),
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   border: Border(
+      //     top: BorderSide(color: DARK_GREY_COLOR),
+      //     bottom: BorderSide(color: DARK_GREY_COLOR),
+      //   ),
+      // ),
       width: MediaQuery.of(context).size.width,
+      height: 45.h,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _Title(title: title),

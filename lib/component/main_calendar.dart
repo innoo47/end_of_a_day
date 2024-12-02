@@ -23,10 +23,9 @@ class MainCalendar extends StatelessWidget {
       child: TableCalendar(
         locale: "ko_kr",
         onDaySelected: onDaySelected,
-        selectedDayPredicate: (date) =>
-            date.year == selectedDate.year &&
-            date.month == selectedDate.month &&
-            date.day == selectedDate.day,
+        selectedDayPredicate: (date) {
+          return isSameDay(selectedDate, date);
+        },
         focusedDay: DateTime.now(),
         firstDay: DateTime(1800, 1, 1),
         lastDay: DateTime(3000, 1, 1),

@@ -1,12 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:end_of_a_day/component/diary_card.dart';
 import 'package:end_of_a_day/component/main_calendar.dart';
 import 'package:end_of_a_day/component/phrases.dart';
 import 'package:end_of_a_day/const/colors.dart';
+import 'package:end_of_a_day/model/diary.dart';
 import 'package:end_of_a_day/screen/writing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:end_of_a_day/model/diary.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .where(
                             'date',
                             isEqualTo:
-                                '${selectedDate.year}${selectedDate.month}${selectedDate.day}',
+                                '${selectedDate.year}${selectedDate.month.toString().padLeft(2, "0")}${selectedDate.day.toString().padLeft(2, "0")}',
                           )
                           .snapshots(),
                       builder: (context, snapshot) {

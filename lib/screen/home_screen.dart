@@ -5,6 +5,8 @@ import 'package:end_of_a_day/const/colors.dart';
 import 'package:end_of_a_day/screen/writing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:end_of_a_day/model/diary.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const WritingScreen(),
+                          builder: (_) => WritingScreen(
+                            selectedDate: selectedDate,
+                          ),
                         ),
                       ),
                       icon: const Icon(
@@ -79,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
               /* 달력 */
               MainCalendar(
                 selectedDate: selectedDate,
-                onDaySelected: onDaySelected,
+                onDaySelected: (selectedDate, focusedDate) =>
+                    onDaySelected(selectedDate, focusedDate, context),
               ),
               SizedBox(
                 height: 10.h,
@@ -96,23 +101,63 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Phrases(
-                          title: '제목',
-                          writedDate: '2024.11.18 오후 3:40',
-                        ),
-                        Phrases(
-                          title: '제목',
-                          writedDate: '2024.11.18 오후 3:40',
-                        ),
-                        Phrases(
-                          title: '제목',
-                          writedDate: '2024.11.18 오후 3:40',
-                        ),
-                      ],
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection(
+                            'diary',
+                          )
+                          .where(
+                            'date',
+                            isEqualTo:
+                                '${selectedDate.year}${selectedDate.month}${selectedDate.day}',
+                          )
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        // Stream을 가져오는 동안 에러가 났을 때
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text('정보를 가져오지 못했습니다.'),
+                          );
+                        }
+
+                        // 로딩 중일 때
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Container();
+                        }
+
+                        // Diary Model로 데이터 매핑
+                        final diarys = snapshot.data!.docs
+                            .map(
+                              (QueryDocumentSnapshot e) => Diary.fromJson(
+                                  json: (e.data() as Map<String, dynamic>)),
+                            )
+                            .toList();
+
+                        return ListView.builder(
+                          itemCount: diarys.length,
+                          itemBuilder: (context, index) {
+                            final diary = diarys[index];
+
+                            return Dismissible(
+                              key: ObjectKey(diary.id),
+                              direction: DismissDirection.endToStart,
+                              onDismissed: (DismissDirection direction) {
+                                FirebaseFirestore.instance
+                                    .collection('diary')
+                                    .doc(diary.id)
+                                    .delete();
+                              },
+                              child: Phrases(
+                                title: diary.title,
+                                writedDate: diary.date.toString(),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -124,7 +169,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void onDaySelected(DateTime selectedDate, DateTime focusedDate) {
+  void onDaySelected(
+    DateTime selectedDate,
+    DateTime focusedDate,
+    BuildContext context,
+  ) {
     setState(() {
       this.selectedDate = selectedDate;
     });

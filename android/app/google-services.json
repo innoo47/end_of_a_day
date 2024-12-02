@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310502233711",
+    "project_id": "end-of-a-day-f0e4b",
+    "storage_bucket": "end-of-a-day-f0e4b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310502233711:android:87aa203fbf3999da4c1f9a",
+        "android_client_info": {
+          "package_name": "com.inu.endofaday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQrJ60fd-bBTYqITlx1yuIreJ4MNoPun0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:end_of_a_day/component/customtextfield.dart';
 import 'package:end_of_a_day/const/colors.dart';
+import 'package:end_of_a_day/model/diary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uuid/uuid.dart';
 
-class WritingScreen extends StatelessWidget {
-  const WritingScreen({super.key});
+class WritingScreen extends StatefulWidget {
+  final DateTime selectedDate;
+
+  const WritingScreen({
+    super.key,
+    required this.selectedDate,
+  });
+
+  @override
+  State<WritingScreen> createState() => _WritingScreenState();
+}
+
+class _WritingScreenState extends State<WritingScreen> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  String? title;
+  String? content;
 
   @override
   Widget build(BuildContext context) {
@@ -26,87 +45,88 @@ class WritingScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18, right: 18),
-          child: Column(
-            children: [
-              TextFormField(
-                cursorColor: Colors.grey,
-                maxLength: 30,
-                maxLines: 1,
-                keyboardType: TextInputType.text,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: Colors.black,
-                  fontFamily: 'MaruBuriRegular',
-                ),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
+      body: Form(
+        key: formKey,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 18, right: 18),
+            child: Column(
+              children: [
+                CustomTextField(
+                  maxLength: 30,
+                  maxLines: 1,
+                  fontSize: 18,
                   labelText: '제목',
-                  labelStyle: TextStyle(
-                    fontSize: 18.sp,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                    fontFamily: 'MaruBuriRegular',
-                  ),
-                  floatingLabelStyle: TextStyle(
-                    fontSize: 18.sp,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                    fontFamily: 'MaruBuriRegular',
-                  ),
+                  onSaved: (String? val) {
+                    // 저장 하면 title 변수에 텍스트 필드 값 저장
+                    title = val;
+                  },
+                  validator: validator,
                 ),
-              ),
-              Expanded(
-                child: TextFormField(
-                  cursorColor: Colors.grey,
-                  keyboardType: TextInputType.text,
-                  maxLength: 500,
-                  maxLines: null,
-                  expands: false,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    color: Colors.black,
-                    fontFamily: 'MaruBuriRegular',
-                  ),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
+                Expanded(
+                  child: CustomTextField(
+                    maxLength: 500,
+                    maxLines: null,
+                    fontSize: 13,
                     labelText: '내용을 입력하세요',
-                    labelStyle: TextStyle(
-                      fontSize: 13.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
-                      fontFamily: 'MaruBuriRegular',
-                    ),
-                    floatingLabelStyle: TextStyle(
-                      fontSize: 13.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
-                      fontFamily: 'MaruBuriRegular',
+                    onSaved: (String? val) {
+                      content = val;
+                    },
+                    validator: validator,
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () => onSavePressed(context),
+                    child: const Text(
+                      '완료',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'MaruBuriRegular',
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: onSavePressed,
-                  child: const Text(
-                    '완료',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'MaruBuriRegular',
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void onSavePressed() {}
+  /* 저장 버튼을 누를 시 */
+  void onSavePressed(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      // 일기 모델 생성
+      final diary = Diary(
+        id: Uuid().v4(),
+        title: title!,
+        content: content!,
+        date: widget.selectedDate,
+      );
+
+      // 일기 모델 파이어스토어에 삽입
+      await FirebaseFirestore.instance
+          .collection(
+            'diary',
+          )
+          .doc(diary.id)
+          .set(diary.toJson());
+
+      Navigator.pop(context);
+    }
+  }
+
+  /* 텍스트 필드 값 검증 */
+  String? validator(String? val) {
+    if (val == null || val.isEmpty) {
+      return '을 입력해주세요';
+    }
+
+    return null;
+  }
 }

@@ -1,4 +1,4 @@
-package com.inu.end_of_a_day
+package com.inu.endofaday
 
 import io.flutter.embedding.android.FlutterActivity
 

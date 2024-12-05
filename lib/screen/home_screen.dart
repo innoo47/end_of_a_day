@@ -5,6 +5,7 @@ import 'package:end_of_a_day/component/phrases.dart';
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:end_of_a_day/model/diary.dart';
 import 'package:end_of_a_day/screen/writing_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime.now().month,
     DateTime.now().day,
   );
+  late DateTime focusedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
+                      // Title
                       '하루의 끝',
                       style: TextStyle(
                         fontSize: 20.sp,
@@ -45,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     IconButton(
+                      // 일기 작성 버튼
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -144,15 +148,55 @@ class _HomeScreenState extends State<HomeScreen> {
                             return Dismissible(
                               key: ObjectKey(diary.id),
                               direction: DismissDirection.endToStart,
+                              background: Container(
+                                color: Colors.red,
+                                alignment: Alignment.centerRight,
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Icon(Icons.delete, color: Colors.white),
+                              ),
+                              confirmDismiss: (direction) async {
+                                return await showCupertinoDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return CupertinoAlertDialog(
+                                      title: Text('일기 삭제'),
+                                      content: Text('정말로 삭제하시겠습니까?'),
+                                      actions: [
+                                        CupertinoDialogAction(
+                                          isDefaultAction: true,
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(false),
+                                          child: Text('취소'),
+                                        ),
+                                        CupertinoDialogAction(
+                                          isDestructiveAction: true,
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(true),
+                                          child: Text('삭제'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                               onDismissed: (DismissDirection direction) {
-                                FirebaseFirestore.instance
-                                    .collection('diary')
-                                    .doc(diary.id)
-                                    .delete();
+                                setState(() {
+                                  FirebaseFirestore.instance
+                                      .collection('diary')
+                                      .doc(diary.id)
+                                      .delete();
+                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('일기가 삭제되었습니다')),
+                                );
                               },
                               child: Phrases(
+                                // 일기
                                 title: diary.title,
-                                writedDate: diary.date.toString(),
+                                // writedDate: diary.date.toString(),
+                                // 필요한 정보만 제공 (년, 월, 일)
+                                writedDate:
+                                    '${diary.date.year}-${diary.date.month.toString().padLeft(2, '0')}-${diary.date.day.toString().padLeft(2, '0')}',
                               ),
                             );
                           },
@@ -162,6 +206,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+              SizedBox(
+                // 확장으로 인한 픽셀 초과 버그 때문에 추가
+                height: 1.h,
+              ),
             ],
           ),
         ),
@@ -169,6 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  /* 날짜 선택 시 */
   void onDaySelected(
     DateTime selectedDate,
     DateTime focusedDate,
@@ -176,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ) {
     setState(() {
       this.selectedDate = selectedDate;
+      this.focusedDate = focusedDate;
     });
   }
 }

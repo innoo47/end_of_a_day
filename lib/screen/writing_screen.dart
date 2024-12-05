@@ -88,6 +88,9 @@ class _WritingScreenState extends State<WritingScreen> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 8.h,
+                ),
               ],
             ),
           ),
@@ -124,7 +127,7 @@ class _WritingScreenState extends State<WritingScreen> {
   /* 텍스트 필드 값 검증 */
   String? validator(String? val) {
     if (val == null || val.isEmpty) {
-      return '을 입력해주세요';
+      return '값을 입력해주세요';
     }
 
     return null;

@@ -10,12 +10,10 @@ class Phrases extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(
-      //   border: Border(
-      //     top: BorderSide(color: DARK_GREY_COLOR),
-      //     bottom: BorderSide(color: DARK_GREY_COLOR),
-      //   ),
-      // ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
       width: MediaQuery.of(context).size.width,
       height: 45.h,
       child: Padding(

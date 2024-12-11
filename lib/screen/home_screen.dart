@@ -4,6 +4,7 @@ import 'package:end_of_a_day/component/main_calendar.dart';
 import 'package:end_of_a_day/component/phrases.dart';
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:end_of_a_day/model/diary.dart';
+import 'package:end_of_a_day/screen/detail_screen.dart';
 import 'package:end_of_a_day/screen/writing_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => WritingScreen(
-                            selectedDate: selectedDate,
+                            selectedDate: DateTime.now(),
                           ),
                         ),
                       ),
@@ -190,13 +191,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SnackBar(content: Text('일기가 삭제되었습니다')),
                                 );
                               },
-                              child: Phrases(
-                                // 일기
-                                title: diary.title,
-                                // writedDate: diary.date.toString(),
-                                // 필요한 정보만 제공 (년, 월, 일)
-                                writedDate:
-                                    '${diary.date.year}-${diary.date.month.toString().padLeft(2, '0')}-${diary.date.day.toString().padLeft(2, '0')}',
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => DetailScreen(
+                                        selectedDate: selectedDate,
+                                        diary: diary,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Phrases(
+                                  // 일기
+                                  title: diary.title,
+                                  // writedDate: diary.date.toString(),
+                                  // 필요한 정보만 제공 (년, 월, 일)
+                                  writedDate:
+                                      '${diary.date.year}-${diary.date.month.toString().padLeft(2, '0')}-${diary.date.day.toString().padLeft(2, '0')}',
+                                ),
                               ),
                             );
                           },
@@ -205,10 +219,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                // 확장으로 인한 픽셀 초과 버그 때문에 추가
-                height: 1.h,
               ),
             ],
           ),

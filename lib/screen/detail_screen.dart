@@ -19,6 +19,17 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  String? title;
+  String? content;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    title = widget.diary.title;
+    content = widget.diary.content;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +53,7 @@ class _DetailScreenState extends State<DetailScreen> {
             children: [
               /* 제목 */
               Text(
-                widget.diary.title,
+                title!,
                 style: TextStyle(
                   fontSize: 19.sp,
                   fontFamily: 'MaruBuriSemiBold',
@@ -65,7 +76,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               /* 내용 */
               Text(
-                widget.diary.content,
+                content!,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontFamily: 'MaruBuriRegular',
@@ -94,8 +105,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
+                onTap: () async {
+                  final updatedDiary = await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => WritingScreen(
@@ -103,7 +114,18 @@ class _DetailScreenState extends State<DetailScreen> {
                         diary: widget.diary,
                       ),
                     ),
-                  ).then((value) => setState(() {}));
+                  );
+
+                  if (updatedDiary != null) {
+                    setState(() {
+                      title = updatedDiary.title;
+                      content = updatedDiary.content;
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('일기가 수정되었습니다')),
+                      );
+                    });
+                  }
                 },
                 child: Text(
                   '수정',

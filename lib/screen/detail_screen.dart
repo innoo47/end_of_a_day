@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:end_of_a_day/model/diary.dart';
 import 'package:end_of_a_day/const/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:end_of_a_day/screen/writing_screen.dart';
@@ -92,9 +94,41 @@ class _DetailScreenState extends State<DetailScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              // 삭제
               GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
+                onTap: () async {
+                  final dialog = await showCupertinoDialog(
+                    context: context,
+                    builder: (context) {
+                      return CupertinoAlertDialog(
+                        title: Text('일기 삭제'),
+                        content: Text('정말로 삭제하시겠습니까?'),
+                        actions: [
+                          CupertinoDialogAction(
+                            isDefaultAction: true,
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: Text('취소'),
+                          ),
+                          CupertinoDialogAction(
+                            isDestructiveAction: true,
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text('삭제'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+
+                  if (dialog) {
+                    setState(() {
+                      FirebaseFirestore.instance
+                          .collection('diary')
+                          .doc(widget.diary.id)
+                          .delete();
+                    });
+
+                    Navigator.pop(context, true);
+                  }
                 },
                 child: Text(
                   '삭제',
@@ -104,6 +138,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
               ),
+              // 수정
               GestureDetector(
                 onTap: () async {
                   final updatedDiary = await Navigator.push(

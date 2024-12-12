@@ -192,8 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               },
                               child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
+                                onTap: () async {
+                                  final deleteSnack = await Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (_) => DetailScreen(
@@ -202,6 +202,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   );
+
+                                  if (deleteSnack) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('일기가 삭제되었습니다')),
+                                    );
+                                  }
                                 },
                                 child: Phrases(
                                   // 일기

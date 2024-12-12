@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:end_of_a_day/component/customtextfield.dart';
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:end_of_a_day/model/diary.dart';
-import 'package:end_of_a_day/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uuid/uuid.dart';

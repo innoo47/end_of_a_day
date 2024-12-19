@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:end_of_a_day/model/diary.dart';
 import 'package:end_of_a_day/const/colors.dart';
+import 'package:end_of_a_day/model/diary.dart';
+import 'package:end_of_a_day/screen/writing_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:end_of_a_day/screen/writing_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   final DateTime selectedDate;
@@ -39,7 +39,7 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         backgroundColor: BACKGROUND_COLOR,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, false),
           icon: Icon(Icons.arrow_back_ios),
         ),
       ),
@@ -135,6 +135,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   style: TextStyle(
                     color: Colors.red,
                     fontFamily: 'MaruBuriSemiBold',
+                    fontSize: 12.sp,
                   ),
                 ),
               ),
@@ -166,6 +167,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   '수정',
                   style: TextStyle(
                     fontFamily: 'MaruBuriSemiBold',
+                    fontSize: 12.sp,
                   ),
                 ),
               ),

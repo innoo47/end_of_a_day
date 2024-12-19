@@ -1,4 +1,5 @@
 import 'package:end_of_a_day/screen/home_screen.dart';
+import 'package:end_of_a_day/screen/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const HomeScreen(),
+      // child: const HomeScreen(),
+      child: LoginScreen(),
     );
   }
 }

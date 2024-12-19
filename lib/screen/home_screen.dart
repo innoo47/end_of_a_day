@@ -9,6 +9,7 @@ import 'package:end_of_a_day/screen/writing_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -109,6 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: StreamBuilder<QuerySnapshot>(
+                      // 날짜와 author가 모두 같아야 리스트 출력
                       stream: FirebaseFirestore.instance
                           .collection(
                             'diary',
@@ -118,6 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             isEqualTo:
                                 '${selectedDate.year}${selectedDate.month.toString().padLeft(2, "0")}${selectedDate.day.toString().padLeft(2, "0")}',
                           )
+                          .where('author',
+                              isEqualTo:
+                                  FirebaseAuth.instance.currentUser!.email)
                           .snapshots(),
                       builder: (context, snapshot) {
                         // Stream을 가져오는 동안 에러가 났을 때

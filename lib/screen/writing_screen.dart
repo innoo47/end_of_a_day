@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:end_of_a_day/component/customtextfield.dart';
 import 'package:end_of_a_day/const/colors.dart';
 import 'package:end_of_a_day/model/diary.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uuid/uuid.dart';
@@ -129,13 +130,33 @@ class _WritingScreenState extends State<WritingScreen> {
           date: widget.selectedDate,
         );
 
+        // 현재 로그인 되어있는 사용자 정보를 가져옴
+        final user = FirebaseAuth.instance.currentUser;
+
+        if (user == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('다시 로그인 해주세요'),
+            ),
+          );
+
+          Navigator.of(context).pop();
+
+          return;
+        }
+
         // 일기 모델 파이어스토어에 삽입
         await FirebaseFirestore.instance
             .collection(
               'diary',
             )
             .doc(diary.id)
-            .set(diary.toJson());
+            .set(
+          {
+            ...diary.toJson(),
+            'author': user.email,
+          },
+        );
 
         Navigator.pop(context);
       } else {

@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BACKGROUND_COLOR,
+      backgroundColor: BACKGROUND_DARK_COLOR,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -19,38 +19,58 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              /* 하루의 끝 타이틀 */
+              /* 하루의 끝 로고 */
               Image(
                 image: AssetImage('assets/images/main_image.png'),
                 width: 160.w,
                 height: 160.h,
               ),
-              /* Google 로그인 버튼 */
-              OutlinedButton(
-                onPressed: () => onGoogleLoginPress(context),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image(
+              /* 로그인 버튼 */
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  /* Google 로그인 버튼 */
+                  ElevatedButton.icon(
+                    onPressed: () => onGoogleLoginPress(context),
+                    label: Text('Google로 시작하기'),
+                    icon: Image(
                       width: 20.w,
                       height: 20.h,
                       image: NetworkImage(
                           'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png'),
                       fit: BoxFit.scaleDown,
                     ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Text(
-                      'Google로 시작하기',
-                      style: TextStyle(
-                        fontFamily: 'MaruBuriSemiBold',
-                        fontSize: 11.sp,
-                        color: Colors.black,
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: BUTTON_DARK_COLOR,
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: 3.h),
+                  /* Apple 로그인 버튼 */
+                  ElevatedButton.icon(
+                    onPressed: () => onGoogleLoginPress(context),
+                    label: Text(' Apple로 시작하기'),
+                    icon: Image(
+                      width: 20.w,
+                      height: 20.h,
+                      image: NetworkImage(
+                          'https://cdn.icon-icons.com/icons2/1488/PNG/512/5315-apple_102578.png'),
+                      fit: BoxFit.scaleDown,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: BUTTON_DARK_COLOR,
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -81,7 +101,7 @@ class LoginScreen extends StatelessWidget {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       // 인증이 완료되면 HomeScreen으로 이동
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => HomeScreen(),
         ),

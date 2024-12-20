@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BACKGROUND_COLOR,
+      backgroundColor: BACKGROUND_DARK_COLOR,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 8),
@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // Title
                       '하루의 끝',
                       style: TextStyle(
+                        color: Colors.white,
                         fontSize: 20.sp,
                         fontFamily: 'MaruBuriBold',
                       ),
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       icon: const Icon(
                         Icons.edit_note_rounded,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -75,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       '하루를 마무리하며 간단한 일기를 작성해 보세요.',
                       style: TextStyle(
+                        color: Colors.white,
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w100,
                         fontFamily: 'MaruBuriLight',
@@ -104,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: COMPONENT_DARK_COLOR,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Padding(

@@ -39,7 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: TextInputType.text,
       style: TextStyle(
         fontSize: widget.fontSize.sp,
-        color: Colors.black,
+        color: Colors.white,
         fontFamily: 'MaruBuriRegular',
       ),
       decoration: InputDecoration(

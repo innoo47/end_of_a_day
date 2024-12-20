@@ -1,3 +1,4 @@
+import 'package:end_of_a_day/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +12,7 @@ class Phrases extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: COMPONENT_DARK_COLOR,
         borderRadius: BorderRadius.circular(12),
       ),
       width: MediaQuery.of(context).size.width,
@@ -41,6 +42,7 @@ class _Title extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
+        color: Colors.white,
         fontSize: 12.sp,
         fontFamily: 'MaruBuriSemiBold',
       ),
@@ -58,6 +60,7 @@ class _Date extends StatelessWidget {
     return Text(
       writedDate,
       style: TextStyle(
+        color: Colors.white,
         fontSize: 10.sp,
         fontFamily: 'MaruBuriLight',
         fontWeight: FontWeight.w100,

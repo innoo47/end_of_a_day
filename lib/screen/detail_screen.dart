@@ -35,12 +35,12 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BACKGROUND_COLOR,
+      backgroundColor: BACKGROUND_DARK_COLOR,
       appBar: AppBar(
-        backgroundColor: BACKGROUND_COLOR,
+        backgroundColor: BACKGROUND_DARK_COLOR,
         leading: IconButton(
           onPressed: () => Navigator.pop(context, false),
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
       ),
       body: SafeArea(
@@ -57,6 +57,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Text(
                 title!,
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 19.sp,
                   fontFamily: 'MaruBuriSemiBold',
                 ),
@@ -69,6 +70,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Text(
                 '${widget.selectedDate.year}년 ${widget.selectedDate.month.toString().padLeft(2, '0')}월 ${widget.selectedDate.day.toString().padLeft(2, '0')}일 작성',
                 style: TextStyle(
+                  color: TEXT_FIELD_FILL_COLOR,
                   fontSize: 11.sp,
                   fontFamily: 'MaruBuriExtraLight',
                 ),
@@ -80,6 +82,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Text(
                 content!,
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 13.sp,
                   fontFamily: 'MaruBuriRegular',
                 ),
@@ -166,6 +169,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Text(
                   '수정',
                   style: TextStyle(
+                    color: Colors.white,
                     fontFamily: 'MaruBuriSemiBold',
                     fontSize: 12.sp,
                   ),

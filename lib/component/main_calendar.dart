@@ -17,7 +17,7 @@ class MainCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: COMPONENT_DARK_COLOR,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
@@ -39,6 +39,7 @@ class MainCalendar extends StatelessWidget {
           headerStyle: HeaderStyle(
             formatButtonVisible: false,
             titleTextStyle: TextStyle(
+              color: Colors.white,
               fontWeight: FontWeight.w500,
               fontSize: 13.sp,
               fontFamily: 'MaruBuriSemiBold',
@@ -47,6 +48,7 @@ class MainCalendar extends StatelessWidget {
           // 요일 스타일
           daysOfWeekStyle: DaysOfWeekStyle(
             weekdayStyle: TextStyle(
+              color: Colors.white,
               fontFamily: 'MaruBuriSemiBold',
               fontSize: 12.sp,
             ),
@@ -59,13 +61,14 @@ class MainCalendar extends StatelessWidget {
           // 달력 스타일
           calendarStyle: CalendarStyle(
             defaultTextStyle: TextStyle(
+              color: Colors.white,
               fontFamily: 'MaruBuriRegular',
               fontSize: 11.sp,
             ),
             todayTextStyle: TextStyle(
               fontFamily: 'MaruBuriRegular',
               fontSize: 11.sp,
-              color: Colors.white,
+              color: Colors.black,
             ),
             weekendTextStyle: TextStyle(
               fontFamily: 'MaruBuriRegular',
@@ -80,13 +83,15 @@ class MainCalendar extends StatelessWidget {
             outsideTextStyle: TextStyle(
               fontFamily: 'MaruBuriRegular',
               fontSize: 11.sp,
-              color: TEXT_FIELD_FILL_COLOR,
+              color: DARK_GREY_COLOR,
             ),
             withinRangeTextStyle: TextStyle(
+              color: Colors.white,
               fontFamily: 'MaruBuriRegular',
               fontSize: 11.sp,
             ),
             rangeStartTextStyle: TextStyle(
+              color: Colors.white,
               fontFamily: 'MaruBuriRegular',
               fontSize: 11.sp,
             ),

@@ -41,12 +41,13 @@ class _WritingScreenState extends State<WritingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BACKGROUND_COLOR,
+      backgroundColor: BACKGROUND_DARK_COLOR,
       appBar: AppBar(
-        backgroundColor: BACKGROUND_COLOR,
+        backgroundColor: BACKGROUND_DARK_COLOR,
         title: Text(
           widget.diary == null ? '일기 쓰기' : '일기 수정',
           style: TextStyle(
+            color: Colors.white,
             fontSize: 15.sp,
             fontFamily: 'MaruBuriRegular',
           ),
@@ -55,6 +56,7 @@ class _WritingScreenState extends State<WritingScreen> {
           onPressed: () => Navigator.pop(context),
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
             size: 15.sp,
           ),
         ),
@@ -98,7 +100,7 @@ class _WritingScreenState extends State<WritingScreen> {
                     child: Text(
                       widget.diary == null ? '완료' : '수정',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'MaruBuriRegular',
                       ),
                     ),

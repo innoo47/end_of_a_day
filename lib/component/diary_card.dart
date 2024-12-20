@@ -1,4 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:end_of_a_day/const/colors.dart';
+import 'package:end_of_a_day/screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class DiaryCard extends StatelessWidget {
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: COMPONENT_DARK_COLOR,
               borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.centerLeft,
@@ -27,11 +29,13 @@ class DiaryCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    /* 명언 */
                     AnimatedTextKit(
                       animatedTexts: [
                         TypewriterAnimatedText(
                           '오늘이라는 날은 두 번 다시\n오지 않는다는 것을 잊지 말라 - 단테',
                           textStyle: TextStyle(
+                            color: Colors.white,
                             fontSize: 11.sp,
                             fontFamily: 'MaruBuriSemiBold',
                           ),
@@ -42,6 +46,7 @@ class DiaryCard extends StatelessWidget {
                       isRepeatingAnimation: true,
                       repeatForever: true,
                     ),
+                    /* 로그아웃 버튼 */
                     IconButton(
                       onPressed: () async {
                         final dialog = await showCupertinoDialog(
@@ -74,10 +79,15 @@ class DiaryCard extends StatelessWidget {
                           await GoogleSignIn().signOut();
 
                           // 로그인 화면으로 이동
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => LoginScreen(),
+                            ),
+                          );
                         }
                       },
                       icon: Icon(Icons.logout_rounded),
+                      color: Colors.white,
                       iconSize: 16.sp,
                     ),
                   ],

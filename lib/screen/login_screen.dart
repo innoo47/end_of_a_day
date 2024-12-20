@@ -1,5 +1,4 @@
 import 'package:end_of_a_day/const/colors.dart';
-import 'package:end_of_a_day/main.dart';
 import 'package:end_of_a_day/screen/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

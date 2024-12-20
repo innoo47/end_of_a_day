@@ -1,4 +1,3 @@
-import 'package:end_of_a_day/screen/home_screen.dart';
 import 'package:end_of_a_day/screen/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

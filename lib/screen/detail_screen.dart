@@ -40,7 +40,11 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: BACKGROUND_DARK_COLOR,
         leading: IconButton(
           onPressed: () => Navigator.pop(context, false),
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 15.sp,
+          ),
         ),
       ),
       body: SafeArea(

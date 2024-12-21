@@ -22,8 +22,9 @@ class LoginScreen extends StatelessWidget {
               /* 하루의 끝 로고 */
               Image(
                 image: AssetImage('assets/images/main_image.png'),
-                width: 160.w,
-                height: 160.h,
+                width: 200.w,
+                height: 300.h,
+                fit: BoxFit.cover,
               ),
               /* 로그인 버튼 */
               Column(

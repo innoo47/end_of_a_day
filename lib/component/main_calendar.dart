@@ -23,6 +23,7 @@ class MainCalendar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 13,
+          vertical: 5,
         ),
         child: TableCalendar(
           locale: "ko_kr",

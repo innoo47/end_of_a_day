@@ -61,7 +61,7 @@ class _Date extends StatelessWidget {
       writedDate,
       style: TextStyle(
         color: Colors.white,
-        fontSize: 10.sp,
+        fontSize: 9.sp,
         fontFamily: 'MaruBuriLight',
         fontWeight: FontWeight.w100,
       ),

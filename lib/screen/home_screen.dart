@@ -24,7 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
     DateTime.now().month,
     DateTime.now().day,
   );
-  late DateTime focusedDate;
+
+  DateTime focusedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
               /* 달력 */
               MainCalendar(
                 selectedDate: selectedDate,
+                focusedDate: focusedDate,
                 onDaySelected: (selectedDate, focusedDate) =>
                     onDaySelected(selectedDate, focusedDate, context),
               ),

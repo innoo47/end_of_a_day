@@ -3,15 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class MainCalendar extends StatelessWidget {
+class MainCalendar extends StatefulWidget {
   final OnDaySelected onDaySelected;
   final DateTime selectedDate;
+  final DateTime focusedDate;
 
   const MainCalendar({
     super.key,
     required this.selectedDate,
     required this.onDaySelected,
+    required this.focusedDate,
   });
+
+  @override
+  State<MainCalendar> createState() => _MainCalendarState();
+}
+
+class _MainCalendarState extends State<MainCalendar> {
+  DateTime? selectedDay;
+  DateTime? focusedDay;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDay = widget.selectedDate;
+    focusedDay = widget.focusedDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +44,11 @@ class MainCalendar extends StatelessWidget {
         ),
         child: TableCalendar(
           locale: "ko_kr",
-          onDaySelected: onDaySelected,
+          onDaySelected: widget.onDaySelected,
           selectedDayPredicate: (DateTime date) {
-            return isSameDay(selectedDate, date);
+            return isSameDay(widget.selectedDate, date);
           },
-          focusedDay: DateTime.now(),
+          focusedDay: widget.focusedDate,
           firstDay: DateTime(1800, 1, 1),
           lastDay: DateTime(3000, 1, 1),
           rowHeight: 33.h,
@@ -46,6 +63,14 @@ class MainCalendar extends StatelessWidget {
               fontFamily: 'MaruBuriSemiBold',
             ),
           ),
+          // 헤더 길게 눌렀을 때 => 오늘 날짜로 이동
+          onHeaderLongPressed: (_) {
+            setState(() {
+              focusedDay = DateTime.now();
+              selectedDay = DateTime.now();
+              widget.onDaySelected(DateTime.now(), DateTime.now());
+            });
+          },
           // 요일 스타일
           daysOfWeekStyle: DaysOfWeekStyle(
             weekdayStyle: TextStyle(

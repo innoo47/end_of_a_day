@@ -95,8 +95,16 @@ class _WritingScreenState extends State<WritingScreen> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child: OutlinedButton(
+                  child: ElevatedButton(
                     onPressed: () => onSavePressed(context),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: BUTTON_DARK_COLOR,
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                     child: Text(
                       widget.diary == null ? '완료' : '수정',
                       style: TextStyle(

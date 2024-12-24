@@ -33,7 +33,13 @@ class LoginScreen extends StatelessWidget {
                   /* Google 로그인 버튼 */
                   ElevatedButton.icon(
                     onPressed: () => onGoogleLoginPress(context),
-                    label: Text('Google로 시작하기'),
+                    label: Text(
+                      'Google로 시작하기',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontFamily: 'MaruBuriRegular',
+                      ),
+                    ),
                     icon: Image(
                       width: 20.w,
                       height: 20.h,
@@ -50,27 +56,33 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 3.h),
-                  /* Apple 로그인 버튼 */
-                  ElevatedButton.icon(
-                    onPressed: () => onGoogleLoginPress(context),
-                    label: Text(' Apple로 시작하기'),
-                    icon: Image(
-                      width: 20.w,
-                      height: 20.h,
-                      image: NetworkImage(
-                          'https://cdn.icon-icons.com/icons2/1488/PNG/512/5315-apple_102578.png'),
-                      fit: BoxFit.scaleDown,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: BUTTON_DARK_COLOR,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
+                  // SizedBox(height: 3.h),
+                  // /* Apple 로그인 버튼 */
+                  // ElevatedButton.icon(
+                  //   onPressed: () => onGoogleLoginPress(context),
+                  //   label: Text(
+                  //     ' Apple로 시작하기',
+                  //     style: TextStyle(
+                  //       fontSize: 12.sp,
+                  //       fontFamily: 'MaruBuriRegular',
+                  //     ),
+                  //   ),
+                  //   icon: Image(
+                  //     width: 20.w,
+                  //     height: 20.h,
+                  //     image: NetworkImage(
+                  //         'https://cdn.icon-icons.com/icons2/1488/PNG/512/5315-apple_102578.png'),
+                  //     fit: BoxFit.scaleDown,
+                  //   ),
+                  //   style: ElevatedButton.styleFrom(
+                  //     foregroundColor: Colors.white,
+                  //     backgroundColor: BUTTON_DARK_COLOR,
+                  //     elevation: 3,
+                  //     shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
@@ -80,6 +92,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+  /* Google 로그인 버튼을 누를 시 */
   void onGoogleLoginPress(BuildContext context) async {
     GoogleSignIn googleSignIn = GoogleSignIn(
       scopes: ['email'],

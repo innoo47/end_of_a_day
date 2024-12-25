@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,64 +27,92 @@ class LoginScreen extends StatelessWidget {
                 height: 300.h,
                 fit: BoxFit.cover,
               ),
-              /* 로그인 버튼 */
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  /* Google 로그인 버튼 */
-                  ElevatedButton.icon(
-                    onPressed: () => onGoogleLoginPress(context),
-                    label: Text(
-                      'Google로 시작하기',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontFamily: 'MaruBuriRegular',
+              /* 간편 로그인 버튼 */
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 13),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    /* Google 로그인 버튼 */
+                    ElevatedButton.icon(
+                      onPressed: () => onGoogleLoginPress(context),
+                      label: Text(
+                        'Google로 시작하기',
+                        style: TextStyle(
+                          color: Color(0xff000000),
+                          fontSize: 13.sp,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
+                        ),
+                      ),
+                      icon: Image(
+                        width: 15.w,
+                        height: 15.h,
+                        image: AssetImage('assets/icon/google.png'),
+                        fit: BoxFit.scaleDown,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color(0xffffffff),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
-                    icon: Image(
-                      width: 20.w,
-                      height: 20.h,
-                      image: NetworkImage(
-                          'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png'),
-                      fit: BoxFit.scaleDown,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: BUTTON_DARK_COLOR,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    SizedBox(height: 3.h),
+                    /* Kakao 로그인 버튼 */
+                    ElevatedButton.icon(
+                      onPressed: () => onGoogleLoginPress(context),
+                      label: Text(
+                        '카카오로 시작하기',
+                        style: TextStyle(
+                          color: Color(0xff000000),
+                          fontSize: 13.sp,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
+                        ),
+                      ),
+                      icon: Image(
+                        width: 15.w,
+                        height: 15.h,
+                        image: AssetImage('assets/icon/kakao.png'),
+                        fit: BoxFit.scaleDown,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color(0xfffee500),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
-                  ),
-                  // SizedBox(height: 3.h),
-                  // /* Apple 로그인 버튼 */
-                  // ElevatedButton.icon(
-                  //   onPressed: () => onGoogleLoginPress(context),
-                  //   label: Text(
-                  //     ' Apple로 시작하기',
-                  //     style: TextStyle(
-                  //       fontSize: 12.sp,
-                  //       fontFamily: 'MaruBuriRegular',
-                  //     ),
-                  //   ),
-                  //   icon: Image(
-                  //     width: 20.w,
-                  //     height: 20.h,
-                  //     image: NetworkImage(
-                  //         'https://cdn.icon-icons.com/icons2/1488/PNG/512/5315-apple_102578.png'),
-                  //     fit: BoxFit.scaleDown,
-                  //   ),
-                  //   style: ElevatedButton.styleFrom(
-                  //     foregroundColor: Colors.white,
-                  //     backgroundColor: BUTTON_DARK_COLOR,
-                  //     elevation: 3,
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                    SizedBox(height: 3.h),
+                    /* Naver 로그인 버튼 */
+                    ElevatedButton.icon(
+                      onPressed: () => onGoogleLoginPress(context),
+                      label: Text(
+                        '네이버로 시작하기',
+                        style: TextStyle(
+                          color: Color(0xffffffff),
+                          fontSize: 13.sp,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
+                        ),
+                      ),
+                      icon: Image(
+                        width: 15.w,
+                        height: 15.h,
+                        image: AssetImage('assets/icon/naver.png'),
+                        fit: BoxFit.scaleDown,
+                        color: Color(0xffffffff),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Color(0xff03c75a),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

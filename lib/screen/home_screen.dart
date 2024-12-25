@@ -140,7 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         // 로딩 중일 때
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Container();
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
 
                         // Diary Model로 데이터 매핑

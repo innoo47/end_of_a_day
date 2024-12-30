@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
               ),
               /* 간편 로그인 버튼 */
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 13),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -42,11 +42,12 @@ class LoginScreen extends StatelessWidget {
                           color: Color(0xff000000),
                           fontSize: 13.sp,
                           fontFamily: GoogleFonts.roboto().fontFamily,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       icon: Image(
-                        width: 15.w,
-                        height: 15.h,
+                        width: 13.w,
+                        height: 13.h,
                         image: AssetImage('assets/icon/google.png'),
                         fit: BoxFit.scaleDown,
                       ),
@@ -68,11 +69,12 @@ class LoginScreen extends StatelessWidget {
                           color: Color(0xff000000),
                           fontSize: 13.sp,
                           fontFamily: GoogleFonts.roboto().fontFamily,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       icon: Image(
-                        width: 15.w,
-                        height: 15.h,
+                        width: 13.w,
+                        height: 13.h,
                         image: AssetImage('assets/icon/kakao.png'),
                         fit: BoxFit.scaleDown,
                       ),
@@ -94,11 +96,12 @@ class LoginScreen extends StatelessWidget {
                           color: Color(0xffffffff),
                           fontSize: 13.sp,
                           fontFamily: GoogleFonts.roboto().fontFamily,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       icon: Image(
-                        width: 15.w,
-                        height: 15.h,
+                        width: 13.w,
+                        height: 13.h,
                         image: AssetImage('assets/icon/naver.png'),
                         fit: BoxFit.scaleDown,
                         color: Color(0xffffffff),

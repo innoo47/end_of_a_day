@@ -33,7 +33,7 @@ class DiaryCard extends StatelessWidget {
                     AnimatedTextKit(
                       animatedTexts: [
                         TypewriterAnimatedText(
-                          '오늘이라는 날은 두 번 다시\n오지 않는다는 것을 잊지 말라 - 단테',
+                          '오늘이라는 날은 두 번 다시\n오지 않는다는 것을 잊지마라 - 단테',
                           textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 11.sp,

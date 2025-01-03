@@ -141,7 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
                           );
                         }
 
